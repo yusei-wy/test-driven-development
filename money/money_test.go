@@ -8,8 +8,8 @@ import (
 )
 
 func TestMultiplication(t *testing.T) {
-	dollar := money.NewDollar(5)
-	dollar.Times(2)
+	five := money.NewDollar(5)
+	product := five.Times(2)
 
-	require.Equal(t, 10, dollar.Amount())
+	require.Equal(t, 10, product.Amount())
 }
