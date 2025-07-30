@@ -16,6 +16,8 @@
 - [ ] amount を private にする
 - [X] *Dollar の副作用を解決する（新しいオブジェクトを返す）*
 - [ ] Money の丸め処理どうする
+- [X] *equals()*
+- [ ] hashCode()
 
 *** [memo]
 - 一気に全ての機能をテストしない

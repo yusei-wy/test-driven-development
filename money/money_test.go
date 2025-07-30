@@ -16,3 +16,8 @@ func TestMultiplication(t *testing.T) {
 	fifteen := five.Times(3)
 	require.Equal(t, 15, fifteen.Amount())
 }
+
+func TestEquality(t *testing.T) {
+	require.True(t, money.NewDollar(5).Equals(money.NewDollar(5)))
+	require.False(t, money.NewDollar(5).Equals(money.NewDollar(6)))
+}
