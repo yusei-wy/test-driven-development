@@ -25,7 +25,7 @@
 - [ ] Dollar と Franc の重複
 - [X] *equals の一般化*
 - [ ] times の一般化
-- [ ] Dollar と Franc を比較する
+- [X] *Dollar と Franc を比較する*
 
 *** [memo]
 - 一気に全ての機能をテストしない

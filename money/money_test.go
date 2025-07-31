@@ -19,6 +19,8 @@ func TestEquality(t *testing.T) {
 	require.False(t, money.NewDollar(5).Equals(money.NewDollar(6)))
 	require.True(t, money.NewFranc(5).Equals(money.NewFranc(5)))
 	require.False(t, money.NewFranc(5).Equals(money.NewFranc(6)))
+	// 型がことなるので失敗する
+	// require.False(t, money.NewDollar(5).Equals(money.NewFranc(5)))
 }
 
 func TestFrancMultiplication(t *testing.T) {
