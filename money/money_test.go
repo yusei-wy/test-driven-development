@@ -9,12 +9,8 @@ import (
 
 func TestMultiplication(t *testing.T) {
 	five := money.NewDollar(5)
-
-	ten := five.Times(2)
-	require.Equal(t, 10, ten.Amount())
-
-	fifteen := five.Times(3)
-	require.Equal(t, 15, fifteen.Amount())
+	require.True(t, money.NewDollar(10).Equals(five.Times(2)))
+	require.True(t, money.NewDollar(15).Equals(five.Times(3)))
 }
 
 func TestEquality(t *testing.T) {
