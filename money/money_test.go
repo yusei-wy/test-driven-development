@@ -33,3 +33,7 @@ func TestConcurrency(t *testing.T) {
 	require.Equal(t, "USD", money.NewDollar(1).Currency())
 	require.Equal(t, "CHF", money.NewFranc(1).Currency())
 }
+
+func TestDifferentStructEquality(t *testing.T) {
+	require.True(t, money.NewFranc(10).Equals(money.NewFranc(5)))
+}

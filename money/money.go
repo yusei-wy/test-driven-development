@@ -1,5 +1,7 @@
 package money
 
+import "strconv"
+
 type moneyBase struct {
 	amount int
 }
@@ -14,6 +16,7 @@ func (m *moneyBase) Amount() int {
 
 type Money[T any] interface {
 	Currency() string
+	String() string
 	Times(multiplier int) T
 	Equals(other T) bool
 }
@@ -31,6 +34,10 @@ func NewDollar(amount int) *Dollar {
 
 func (d *Dollar) Currency() string {
 	return "USD"
+}
+
+func (d *Dollar) String() string {
+	return strconv.Itoa(d.amount) + " " + d.Currency()
 }
 
 func (d *Dollar) Times(multiplier int) *Dollar {
@@ -51,6 +58,10 @@ func NewFranc(amount int) *Franc {
 
 func (f *Franc) Currency() string {
 	return "CHF"
+}
+
+func (d *Franc) String() string {
+	return strconv.Itoa(d.amount) + " " + d.Currency()
 }
 
 func (f *Franc) Times(multiplier int) *Franc {
