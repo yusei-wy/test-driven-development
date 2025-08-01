@@ -34,7 +34,7 @@
 - [X] *equals の一般化*
 - [ ] times の一般化
 - [X] *Dollar と Franc を比較する*
-- [ ] 通貨の概念
+- [X] *通貨の概念*
 - [ ] TestFrancMultiplication を削除する？
 
 *** [memo]

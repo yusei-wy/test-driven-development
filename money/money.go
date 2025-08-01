@@ -13,6 +13,7 @@ func (m *moneyBase) Amount() int {
 }
 
 type Money[T any] interface {
+	Currency() string
 	Times(multiplier int) T
 	Equals(other T) bool
 }
@@ -26,6 +27,10 @@ type Dollar struct {
 
 func NewDollar(amount int) *Dollar {
 	return &Dollar{newMoneyBase(amount)}
+}
+
+func (d *Dollar) Currency() string {
+	return "USD"
 }
 
 func (d *Dollar) Times(multiplier int) *Dollar {
@@ -42,6 +47,10 @@ type Franc struct {
 
 func NewFranc(amount int) *Franc {
 	return &Franc{newMoneyBase(amount)}
+}
+
+func (f *Franc) Currency() string {
+	return "CHF"
 }
 
 func (f *Franc) Times(multiplier int) *Franc {

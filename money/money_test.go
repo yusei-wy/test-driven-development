@@ -28,3 +28,8 @@ func TestFrancMultiplication(t *testing.T) {
 	assert.True(t, money.NewFranc(10).Equals(five.Times(2)))
 	assert.True(t, money.NewFranc(15).Equals(five.Times(3)))
 }
+
+func TestConcurrency(t *testing.T) {
+	require.Equal(t, "USD", money.NewDollar(1).Currency())
+	require.Equal(t, "CHF", money.NewFranc(1).Currency())
+}
