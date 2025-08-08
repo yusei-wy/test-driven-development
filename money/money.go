@@ -1,6 +1,9 @@
 package money
 
-import "strconv"
+import (
+	"strconv"
+	"tdd/expression"
+)
 
 type Concurrency string
 
@@ -8,6 +11,8 @@ const (
 	Dollar Concurrency = "USD"
 	Franc  Concurrency = "CHF"
 )
+
+var _ expression.Expression = (*Money)(nil)
 
 type Money struct {
 	currency Concurrency
@@ -39,6 +44,10 @@ func (m *Money) Currency() string {
 
 func (m *Money) String() string {
 	return strconv.Itoa(m.amount) + " " + m.Currency()
+}
+
+func (m *Money) Plus(added *Money) *Money {
+	return NewMoney(m.currency, m.amount+added.amount)
 }
 
 func (m *Money) Times(multiplier int) *Money {
