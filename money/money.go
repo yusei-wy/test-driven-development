@@ -2,72 +2,49 @@ package money
 
 import "strconv"
 
-type moneyBase struct {
-	amount int
+type Concurrency string
+
+const (
+	Dollar Concurrency = "USD"
+	Franc  Concurrency = "CHF"
+)
+
+type Money struct {
+	currency Concurrency
+	amount   int
 }
 
-func newMoneyBase(amount int) moneyBase {
-	return moneyBase{amount: amount}
+func NewMoney(currency Concurrency, amount int) *Money {
+	return &Money{
+		currency: currency,
+		amount:   amount,
+	}
 }
 
-func (m *moneyBase) Amount() int {
+func NewDollar(amount int) *Money {
+	return NewMoney(Dollar, amount)
+}
+
+func NewFranc(amount int) *Money {
+	return NewMoney(Franc, amount)
+}
+
+func (m *Money) Amount() int {
 	return m.amount
 }
 
-type Money[T any] interface {
-	Currency() string
-	String() string
-	Times(multiplier int) T
-	Equals(other T) bool
+func (m *Money) Currency() string {
+	return string(m.currency)
 }
 
-var _ Money[*Dollar] = (*Dollar)(nil)
-var _ Money[*Franc] = (*Franc)(nil)
-
-type Dollar struct {
-	moneyBase
+func (m *Money) String() string {
+	return strconv.Itoa(m.amount) + " " + m.Currency()
 }
 
-func NewDollar(amount int) *Dollar {
-	return &Dollar{newMoneyBase(amount)}
+func (m *Money) Times(multiplier int) *Money {
+	return NewMoney(m.currency, m.amount*multiplier)
 }
 
-func (d *Dollar) Currency() string {
-	return "USD"
-}
-
-func (d *Dollar) String() string {
-	return strconv.Itoa(d.amount) + " " + d.Currency()
-}
-
-func (d *Dollar) Times(multiplier int) *Dollar {
-	return NewDollar(d.amount * multiplier)
-}
-
-func (d *Dollar) Equals(other *Dollar) bool {
-	return d.amount == other.amount
-}
-
-type Franc struct {
-	moneyBase
-}
-
-func NewFranc(amount int) *Franc {
-	return &Franc{newMoneyBase(amount)}
-}
-
-func (f *Franc) Currency() string {
-	return "CHF"
-}
-
-func (d *Franc) String() string {
-	return strconv.Itoa(d.amount) + " " + d.Currency()
-}
-
-func (f *Franc) Times(multiplier int) *Franc {
-	return NewFranc(f.amount * multiplier)
-}
-
-func (f *Franc) Equals(other *Franc) bool {
-	return f.amount == other.amount
+func (m *Money) Equals(other *Money) bool {
+	return m.amount == other.amount && m.currency == other.currency
 }

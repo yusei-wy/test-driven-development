@@ -27,24 +27,24 @@
 異なる型を比較したいならパッケージ関数を用意して、引数を interface とすることで振る舞いは変更できそう。
 または、変換メソッドで片方の型に合わせるなど。
 
-** TODO:
+** TODO リスト [62%]
 # 次にやることは太字にする
 # 作業が終わったら打ち消し線を引いたりチェックする
 - [ ] $5 + 10 CHF = $10（レートが 2:1 の場合）
-- [X] **$5 * 2 = $10**
-- [X] *amount を private にする*
-- [X] *Dollar の副作用を解決する（新しいオブジェクトを返す）*
+- [X] $5 * 2 = $10
+- [X] amount を private にする
+- [X] Dollar の副作用を解決する（新しいオブジェクトを返す）
 - [ ] Money の丸め処理どうする
-- [X] *equals()*
+- [X] equals()
 - [ ] hashCode()
 - [ ] null との等価性比較
 - [ ] 他のオブジェクトとの等価性比較
-- [X] *5 CHF * 2 = 10 CHF*
-- [X] *Dollar と Franc の重複*
-- [X] *equals の一般化*
-- [X] *times の一般化*
-- [X] *Dollar と Franc を比較する*
-- [X] *通貨の概念*
+- [X] 5 CHF * 2 = 10 CHF
+- [X] Dollar と Franc の重複
+- [X] equals の一般化
+- [X] times の一般化
+- [X] Dollar と Franc を比較する
+- [X] 通貨の概念
 - [ ] TestFrancMultiplication を削除する？
 
 *** [memo]
