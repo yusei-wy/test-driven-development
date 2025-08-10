@@ -53,8 +53,10 @@ func (m *Money) Times(multiplier int) *Money {
 	return NewMoney(m.currency, m.amount*multiplier)
 }
 
-func (m *Money) Reduce(to Concurrency) *Money {
-	return m
+// Reduce は Money を指定した通貨に換算する
+func (m *Money) Reduce(provider RateProvider, to Concurrency) *Money {
+	rate := provider.Rate(m.currency, to)
+	return NewMoney(to, m.amount/rate)
 }
 
 func (m *Money) Equals(other *Money) bool {

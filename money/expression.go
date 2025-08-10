@@ -1,5 +1,9 @@
 package money
 
 type Expression interface {
-	Reduce(to Concurrency) *Money
+	Reduce(provider RateProvider, to Concurrency) *Money
+}
+
+type RateProvider interface {
+	Rate(from, to Concurrency) int
 }

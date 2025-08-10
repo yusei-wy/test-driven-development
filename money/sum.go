@@ -1,6 +1,8 @@
 package money
 
-var _ Expression = (*Sum)(nil)
+var (
+	_ Expression = (*Sum)(nil)
+)
 
 type Sum struct {
 	augend *Money
@@ -22,7 +24,10 @@ func NewSum(augend, addend *Money) *Sum {
 	}
 }
 
-func (s *Sum) Reduce(to Concurrency) *Money {
-	amount := s.augend.Amount() + s.addend.Amount()
+// Reduce は augend と added を目的通貨に変換することで、通貨を一致させてから計算を行い、その結果を返します。
+func (s *Sum) Reduce(provider RateProvider, to Concurrency) *Money {
+	augend := s.augend.Reduce(provider, to)
+	addend := s.addend.Reduce(provider, to)
+	amount := augend.Amount() + addend.Amount()
 	return NewMoney(to, amount)
 }
