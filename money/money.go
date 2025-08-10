@@ -2,7 +2,6 @@ package money
 
 import (
 	"strconv"
-	"tdd/expression"
 )
 
 type Concurrency string
@@ -12,7 +11,7 @@ const (
 	Franc  Concurrency = "CHF"
 )
 
-var _ expression.Expression = (*Money)(nil)
+var _ Expression = (*Money)(nil)
 
 type Money struct {
 	currency Concurrency
@@ -46,12 +45,16 @@ func (m *Money) String() string {
 	return strconv.Itoa(m.amount) + " " + m.Currency()
 }
 
-func (m *Money) Plus(added *Money) *Money {
-	return NewMoney(m.currency, m.amount+added.amount)
+func (m *Money) Plus(added *Money) *Sum {
+	return NewSum(m, added)
 }
 
 func (m *Money) Times(multiplier int) *Money {
 	return NewMoney(m.currency, m.amount*multiplier)
+}
+
+func (m *Money) Reduce(to Concurrency) *Money {
+	return m
 }
 
 func (m *Money) Equals(other *Money) bool {

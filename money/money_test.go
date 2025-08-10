@@ -26,9 +26,29 @@ func TestConcurrency(t *testing.T) {
 }
 
 func TestSimpleAddition(t *testing.T) {
-	b := bank.NewBank()
 	five := money.NewDollar(5)
 	sum := five.Plus(five)
+	b := bank.NewBank()
 	reduced := b.Reduce(sum, money.Dollar)
 	require.Equal(t, money.NewDollar(10), reduced)
+}
+
+func TestPlusReturnsSum(t *testing.T) {
+	five := money.NewDollar(5)
+	sum := five.Plus(five)
+	require.Equal(t, five, sum.Augend())
+	require.Equal(t, five, sum.Addend())
+}
+
+func TestReduceSum(t *testing.T) {
+	sum := money.NewSum(money.NewDollar(3), money.NewDollar(4))
+	b := bank.NewBank()
+	result := b.Reduce(sum, money.Dollar)
+	require.True(t, money.NewDollar(7).Equals(result))
+}
+
+func TestReduceMoney(t *testing.T) {
+	b := bank.NewBank()
+	result := b.Reduce(money.NewDollar(1), money.Dollar)
+	require.True(t, money.NewDollar(1).Equals(result))
 }

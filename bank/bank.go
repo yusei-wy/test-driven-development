@@ -1,7 +1,6 @@
 package bank
 
 import (
-	"tdd/expression"
 	"tdd/money"
 )
 
@@ -12,6 +11,6 @@ func NewBank() *Bank {
 	return &Bank{}
 }
 
-func (b *Bank) Reduce(source expression.Expression, to money.Concurrency) *money.Money {
-	return money.NewDollar(10)
+func (b *Bank) Reduce(source money.Expression, to money.Concurrency) *money.Money {
+	return source.Reduce(to)
 }
