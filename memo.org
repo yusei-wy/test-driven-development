@@ -22,13 +22,13 @@
 ** New TODO リスト [66%]
 - [X] $5 + 10 CHF = $10（レートが 2:1 の場合）
 - [X] $5 + $5 = $10
-- [ ] $5 + $5 が Money を返す
+- [X] $5 + $5 が Money を返す
 - [X] Bank.reduce(Money)
 - [X] Money を変換して換算を行う
 - [X] Reduce(Bank, string)
 - [X] bank -> money への依存を無くす（循環参照改善）
-- [ ] Sum.Plus
-- [ ] Expression.Times
+- [X] Sum.Plus
+- [X] Expression.Times
 
 *** [memo]
 - 一気に全ての機能をテストしない

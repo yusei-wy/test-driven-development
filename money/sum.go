@@ -28,8 +28,12 @@ func NewSum(augend, addend Expression) *Sum {
 	}
 }
 
+func (s *Sum) Times(multiplier int) Expression {
+	return NewSum(s.augend.Times(multiplier), s.addend.Times(multiplier))
+}
+
 func (s *Sum) Plus(added Expression) Expression {
-	return nil
+	return NewSum(s, added)
 }
 
 // Reduce は augend と added を目的通貨に変換することで、通貨を一致させてから計算を行いその結果を返します。

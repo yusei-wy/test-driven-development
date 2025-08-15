@@ -76,3 +76,27 @@ func TestMixedAddition(t *testing.T) {
 	result := b.Reduce(fiveBucks.Plus(tenFrancs), money.Dollar)
 	require.Equal(t, money.NewDollar(10), result)
 }
+
+func TestSumPlusMoney(t *testing.T) {
+	fiveBucks := money.NewDollar(5)
+	tenFrancs := money.NewFranc(10)
+
+	b := bank.NewBank()
+	b.AddRate(money.Franc, money.Dollar, 2)
+
+	sum := money.NewSum(fiveBucks, tenFrancs).Plus(fiveBucks)
+	result := b.Reduce(sum, money.Dollar)
+	require.Equal(t, money.NewDollar(15), result)
+}
+
+func TestSumTimesMoney(t *testing.T) {
+	fiveBucks := money.NewDollar(5)
+	tenFrancs := money.NewFranc(10)
+
+	b := bank.NewBank()
+	b.AddRate(money.Franc, money.Dollar, 2)
+
+	sum := money.NewSum(fiveBucks, tenFrancs).Times(2)
+	result := b.Reduce(sum, money.Dollar)
+	require.Equal(t, money.NewDollar(20), result)
+}
