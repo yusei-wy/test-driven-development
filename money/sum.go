@@ -5,29 +5,36 @@ var (
 )
 
 type Sum struct {
-	augend *Money
-	addend *Money
+	augend Expression
+	addend Expression
 }
 
+// Augend は Sum の加算元の Money を返します。
+// 主にテストで使用されます。
 func (s *Sum) Augend() *Money {
-	return s.augend
+	return (s.augend).(*Money)
 }
 
+// Addend は Sum の加算先の Money を返します。
+// 主にテストで使用されます。
 func (s *Sum) Addend() *Money {
-	return s.addend
+	return (s.addend).(*Money)
 }
 
-func NewSum(augend, addend *Money) *Sum {
+func NewSum(augend, addend Expression) *Sum {
 	return &Sum{
 		augend: augend,
 		addend: addend,
 	}
 }
 
-// Reduce は augend と added を目的通貨に変換することで、通貨を一致させてから計算を行い、その結果を返します。
+func (s *Sum) Plus(added Expression) Expression {
+	return nil
+}
+
+// Reduce は augend と added を目的通貨に変換することで、通貨を一致させてから計算を行いその結果を返します。
 func (s *Sum) Reduce(provider RateProvider, to Concurrency) *Money {
-	augend := s.augend.Reduce(provider, to)
-	addend := s.addend.Reduce(provider, to)
-	amount := augend.Amount() + addend.Amount()
+	amount := s.augend.Reduce(provider, to).Amount() +
+		s.addend.Reduce(provider, to).Amount()
 	return NewMoney(to, amount)
 }

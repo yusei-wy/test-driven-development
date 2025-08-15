@@ -1,6 +1,7 @@
 package money
 
 type Expression interface {
+	Plus(added Expression) Expression
 	Reduce(provider RateProvider, to Concurrency) *Money
 }
 

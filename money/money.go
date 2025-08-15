@@ -45,11 +45,11 @@ func (m *Money) String() string {
 	return strconv.Itoa(m.amount) + " " + m.Currency()
 }
 
-func (m *Money) Plus(added *Money) *Sum {
+func (m *Money) Plus(added Expression) Expression {
 	return NewSum(m, added)
 }
 
-func (m *Money) Times(multiplier int) *Money {
+func (m *Money) Times(multiplier int) Expression {
 	return NewMoney(m.currency, m.amount*multiplier)
 }
 

@@ -37,7 +37,7 @@ func TestSimpleAddition(t *testing.T) {
 
 func TestPlusReturnsSum(t *testing.T) {
 	five := money.NewDollar(5)
-	sum := five.Plus(five)
+	sum := five.Plus(five).(*money.Sum)
 	require.Equal(t, five, sum.Augend())
 	require.Equal(t, five, sum.Addend())
 }
@@ -64,4 +64,15 @@ func TestReduceMoneyDifferentCurrency(t *testing.T) {
 
 func TestIdentityRate(t *testing.T) {
 	require.Equal(t, bank.NewBank().Rate(money.Dollar, money.Dollar), 1)
+}
+
+func TestMixedAddition(t *testing.T) {
+	fiveBucks := money.NewDollar(5)
+	tenFrancs := money.NewFranc(10)
+
+	b := bank.NewBank()
+	b.AddRate(money.Franc, money.Dollar, 2)
+
+	result := b.Reduce(fiveBucks.Plus(tenFrancs), money.Dollar)
+	require.Equal(t, money.NewDollar(10), result)
 }

@@ -24,7 +24,7 @@ func (b *Bank) AddRate(from, to money.Concurrency, rate int) {
 	b.rates[money.NewPair(from, to)] = rate
 }
 
-// Rate は指定された通貨への変換レートを返します。
+// Rate は 指定された通貨ペアのレートを返します。
 func (b *Bank) Rate(from, to money.Concurrency) int {
 	if rate, ok := b.rates[money.NewPair(from, to)]; ok {
 		return rate
